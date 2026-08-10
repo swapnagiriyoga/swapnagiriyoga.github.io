@@ -3,6 +3,9 @@
 Marketing website for **Swapnagiri Yoga** — live online yoga sessions.
 _"Find Your Inner Peak."_
 
+**Live at https://swapnagiriyoga.github.io/** — deployed automatically from
+`main` by [the Pages workflow](.github/workflows/deploy.yml).
+
 Single-page React site: serene, light-led, mobile-first, and fully keyboard
 accessible. Sessions are arranged personally over WhatsApp — there is no fixed
 timetable, no price list, and no booking system to maintain.
