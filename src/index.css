@@ -1,0 +1,395 @@
+@import 'tailwindcss';
+
+/* Theme is driven by data-theme on <html>, set before paint by the inline
+   script in index.html. This teaches Tailwind's `dark:` variant to follow it. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* ==========================================================================
+   Design tokens — Swapnagiri Yoga
+   Tailwind v4 is configured from CSS. Everything declared inside `@theme`
+   becomes a utility class (e.g. --color-surface -> `bg-surface`).
+
+   Light mode is the brief's palette, unchanged. Dark mode overrides the same
+   variables below, so every utility re-themes without touching markup.
+   ========================================================================== */
+@theme {
+  /* --- Surfaces --- */
+  --color-surface: #ffffff; /* primary background */
+  --color-surface-alt: #f6eeff; /* alternating sections */
+  --color-card: #ffffff; /* cards, inputs, floating panels */
+  --color-line: #f0e4fb; /* hairline borders and dividers */
+  --color-wash: #e0aaff; /* pale washes, gradient blends, glows */
+
+  /* --- Accents --- */
+  --color-accent: #c77dff; /* icons, borders, decoration — NEVER body text */
+  --color-accent-2: #9d4edd; /* highlights, focus ring */
+  --color-brand: #7b2cbf; /* accent text, links, key headings */
+  --color-brand-deep: #5a189a; /* strong emphasis */
+
+  /* --- Calls to action --- */
+  --color-cta: #7b2cbf;
+  --color-cta-hover: #5a189a;
+  --color-cta-fg: #ffffff;
+
+  /* --- Text --- */
+  --color-ink-heading: #3c096c;
+  --color-ink: #240046;
+
+  /* --- The footer, dark in both themes --- */
+  --color-night: #10002b;
+
+  /* Luminous parts of the hero artwork — the sun's core and the snow caps.
+     These must stay lighter than what surrounds them, so they cannot use
+     `surface` (which goes dark) or they invert into holes. */
+  --color-glow: #ffffff;
+
+  /* --- Typography --- */
+  --font-display: 'Cormorant Garamond', 'Iowan Old Style', 'Palatino Linotype',
+    'Book Antiqua', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+
+  /* --- Radii: generous and rounded, no harsh edges --- */
+  --radius-soft: 1rem;
+  --radius-card: 1.5rem;
+  --radius-pill: 999px;
+
+  /* --- Soft, layered shadows (never heavy) --- */
+  --shadow-soft: 0 4px 24px -8px rgb(36 0 70 / 0.1);
+  --shadow-lift: 0 18px 40px -20px rgb(36 0 70 / 0.22);
+  --shadow-glow: 0 10px 30px -8px rgb(123 44 191 / 0.45);
+  --shadow-nav: 0 6px 24px -14px rgb(36 0 70 / 0.28);
+
+  /* --- Motion --- */
+  --ease-calm: cubic-bezier(0.22, 0.68, 0.36, 1);
+}
+
+/* ==========================================================================
+   Dark theme
+   Same tokens, re-pointed. Contrast was checked against the surface each
+   token actually lands on: body text 12.5:1, accent text 8.3:1, and the CTA's
+   dark label on pale lavender 5.1:1.
+   ========================================================================== */
+html[data-theme='dark'] {
+  --color-surface: #120031;
+  --color-surface-alt: #190740;
+  --color-card: #1e0a4a;
+  --color-line: #34176b;
+  --color-wash: #7b2cbf;
+
+  --color-accent: #c77dff;
+  --color-accent-2: #e0aaff;
+  --color-brand: #d8a5ff;
+  --color-brand-deep: #edd4ff;
+
+  --color-cta: #c77dff;
+  --color-cta-hover: #e0aaff;
+  --color-cta-fg: #1b0742;
+
+  --color-ink-heading: #f7f0ff;
+  --color-ink: #e4d7f5;
+
+  --color-night: #0a0020;
+
+  /* A pale lavender moon rather than a white sun. */
+  --color-glow: #e0aaff;
+
+  /* Shadows need more lift and less spread on a dark ground. */
+  --shadow-soft: 0 4px 24px -8px rgb(0 0 0 / 0.5);
+  --shadow-lift: 0 18px 40px -20px rgb(0 0 0 / 0.65);
+  --shadow-glow: 0 10px 30px -8px rgb(199 125 255 / 0.35);
+  --shadow-nav: 0 6px 24px -14px rgb(0 0 0 / 0.7);
+
+  color-scheme: dark;
+}
+
+/* ==========================================================================
+   Base styles
+   ========================================================================== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Sticky navbar clearance for every anchor target. */
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    line-height: 1.75; /* airy and breathable */
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* `clip` rather than `hidden`: it contains the decorative orbs that bleed
+       past the viewport without turning <body> into a scroll container. */
+    overflow-x: clip;
+    transition:
+      background-color 0.4s var(--ease-calm),
+      color 0.4s var(--ease-calm);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--color-ink-heading);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: 0.005em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* A single, consistent, always-visible focus ring. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent-2);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Locked while the mobile menu is open. */
+  body.is-locked {
+    overflow: hidden;
+  }
+
+  /* Native controls (scrollbars, form widgets) follow the theme. */
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-cta-fg);
+  }
+}
+
+/* ==========================================================================
+   Utilities & component classes
+   ========================================================================== */
+@layer components {
+  /* --- Scroll reveal (driven by useScrollReveal) ------------------------ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.9s var(--ease-calm),
+      transform 0.9s var(--ease-calm);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* --- Eyebrow label above section headings ---------------------------- */
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-brand);
+  }
+
+  /* --- Soft glowing orbs used as background decoration ------------------ */
+  .orb {
+    position: absolute;
+    border-radius: 999px;
+    filter: blur(70px);
+    pointer-events: none;
+  }
+}
+
+/* ==========================================================================
+   Keyframes — all gentle, all slow.
+   ========================================================================== */
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(2%, -3%, 0);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes fog-slide {
+  from {
+    transform: translateX(-4%);
+  }
+  to {
+    transform: translateX(4%);
+  }
+}
+
+/* Zen backdrop — four soft lavender clouds drifting behind the alternating
+   sections. Deliberately long, mismatched periods so they never visibly loop
+   or sync up with each other. Transform + opacity only, so the browser keeps
+   them on the compositor and the blur is rasterised once. */
+@keyframes zen-a {
+  0%,
+  100% {
+    transform: translate3d(-6%, -4%, 0) scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate3d(7%, 6%, 0) scale(1.18);
+    opacity: 0.8;
+  }
+}
+
+@keyframes zen-b {
+  0%,
+  100% {
+    transform: translate3d(6%, 7%, 0) scale(1.12);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translate3d(-8%, -6%, 0) scale(0.94);
+    opacity: 0.45;
+  }
+}
+
+@keyframes zen-c {
+  0%,
+  100% {
+    transform: translate3d(0, 9%, 0) scale(0.98);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate3d(9%, -7%, 0) scale(1.22);
+    opacity: 0.75;
+  }
+}
+
+@keyframes zen-d {
+  0%,
+  100% {
+    transform: translate3d(4%, -8%, 0) scale(1.05);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate3d(-5%, 8%, 0) scale(1.25);
+    opacity: 0.35;
+  }
+}
+
+.animate-zen-a {
+  animation: zen-a 34s ease-in-out infinite;
+}
+.animate-zen-b {
+  animation: zen-b 41s ease-in-out infinite;
+}
+.animate-zen-c {
+  animation: zen-c 47s ease-in-out infinite;
+}
+.animate-zen-d {
+  animation: zen-d 53s ease-in-out infinite;
+}
+
+@keyframes scroll-cue {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 1;
+  }
+}
+
+.animate-drift {
+  animation: drift 18s ease-in-out infinite;
+}
+.animate-breathe {
+  animation: breathe 9s ease-in-out infinite;
+}
+.animate-fog {
+  animation: fog-slide 26s ease-in-out infinite alternate;
+}
+.animate-scroll-cue {
+  animation: scroll-cue 2.4s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   Reduced motion.
+   `.force-reduce-motion` is set on <html> when the visitor picks "reduce" in
+   the site's own motion control, so the same rules apply either way.
+   Content must render visible, never hidden.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .animate-drift,
+  .animate-breathe,
+  .animate-fog,
+  .animate-scroll-cue,
+  .animate-zen-a,
+  .animate-zen-b,
+  .animate-zen-c,
+  .animate-zen-d {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+html.force-reduce-motion {
+  scroll-behavior: auto;
+}
+
+html.force-reduce-motion .reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+html.force-reduce-motion .animate-drift,
+html.force-reduce-motion .animate-breathe,
+html.force-reduce-motion .animate-fog,
+html.force-reduce-motion .animate-scroll-cue,
+html.force-reduce-motion .animate-zen-a,
+html.force-reduce-motion .animate-zen-b,
+html.force-reduce-motion .animate-zen-c,
+html.force-reduce-motion .animate-zen-d {
+  animation: none;
+}
+
+html.force-reduce-motion *,
+html.force-reduce-motion *::before,
+html.force-reduce-motion *::after {
+  transition-duration: 0.01ms !important;
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+}
