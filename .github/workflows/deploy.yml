@@ -42,7 +42,13 @@ jobs:
 
       - run: npm run build
 
+      # `enablement` lets the workflow switch Pages on and set its source to
+      # GitHub Actions by itself. Without it the very first run fails, because
+      # Pages does not exist yet on a brand-new repo and this step has nowhere
+      # to publish to.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:
