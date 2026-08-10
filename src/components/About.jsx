@@ -14,7 +14,7 @@ const values = [
     image: peaceImg,
     alt: 'A lotus flower opening on still water, sending out gentle ripples',
     title: 'Inner Peace',
-    body: 'Stillness is not silence — it is the quiet you keep beneath the noise. We practise finding it, and returning.',
+    body: 'Stillness is not the absence of noise — it is the space you learn to keep underneath it. We practise finding that space and returning to it, again and again.',
   },
   {
     image: mindfulnessImg,
