@@ -13,7 +13,7 @@ const values = [
   {
     image: peaceImg,
     alt: 'A lotus flower opening on still water, sending out gentle ripples',
-    title: 'Inner Peace',
+    title: 'Peace',
     body: 'Stillness is not the absence of noise — it is the space you learn to keep underneath it. We practise finding that space and returning to it, again and again.',
   },
   {
