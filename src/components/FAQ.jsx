@@ -3,8 +3,7 @@ import Section from './ui/Section.jsx';
 import Reveal from './ui/Reveal.jsx';
 import Icon from './ui/Icon.jsx';
 import WhatsAppCTA from './ui/WhatsAppCTA.jsx';
-import { faqs } from '../data/faqs.js';
-import { messages } from '../lib/whatsapp.js';
+import { useTranslation } from '../i18n/index.js';
 
 /**
  * A single disclosure. Built from a real <button> with aria-expanded /
@@ -68,18 +67,14 @@ function FaqItem({ faq, isOpen, onToggle }) {
 }
 
 export function FAQ() {
+  const { t } = useTranslation();
   // Single-open accordion; the first question starts expanded.
-  const [openId, setOpenId] = useState(faqs[0].id);
+  const [openId, setOpenId] = useState(t.faq.items[0].id);
 
   return (
-    <Section
-      id="faq"
-      eyebrow="Good Questions"
-      title="Everything you were about to ask"
-      lead="And if something is still unclear, ask us directly — a real person answers."
-    >
+    <Section id="faq" eyebrow={t.faq.eyebrow} title={t.faq.title} lead={t.faq.lead}>
       <div className="mx-auto max-w-3xl space-y-4">
-        {faqs.map((faq, index) => (
+        {t.faq.items.map((faq, index) => (
           <Reveal key={faq.id} delay={index * 70}>
             <FaqItem
               faq={faq}
@@ -91,9 +86,9 @@ export function FAQ() {
       </div>
 
       <Reveal delay={200} className="mt-12 flex flex-col items-center gap-4 text-center">
-        <p className="text-sm text-ink/65">Still wondering about something?</p>
-        <WhatsAppCTA message={messages.general} variant="outline">
-          Ask us on WhatsApp
+        <p className="text-sm text-ink/65">{t.faq.stillWondering}</p>
+        <WhatsAppCTA message={t.whatsapp.general} variant="outline">
+          {t.faq.askCta}
         </WhatsAppCTA>
       </Reveal>
     </Section>

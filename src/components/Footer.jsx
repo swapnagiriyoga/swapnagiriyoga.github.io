@@ -2,7 +2,8 @@ import Icon from './ui/Icon.jsx';
 import Logo from './ui/Logo.jsx';
 import ThemeToggle from './ui/ThemeToggle.jsx';
 import MotionToggle from './ui/MotionToggle.jsx';
-import { buildWhatsAppLink, messages } from '../lib/whatsapp.js';
+import { buildWhatsAppLink } from '../lib/whatsapp.js';
+import { useTranslation } from '../i18n/index.js';
 import { brand, navLinks, socials } from '../site.config.js';
 
 /**
@@ -11,6 +12,7 @@ import { brand, navLinks, socials } from '../site.config.js';
  * light page above is a fade rather than a hard line.
  */
 export function Footer() {
+  const { t } = useTranslation();
   const year = new Date().getFullYear();
 
   return (
@@ -50,8 +52,7 @@ export function Footer() {
           <div>
             <Logo tone="onDark" className="h-14 sm:h-16" />
             <p className="mt-5 max-w-sm text-[0.95rem] leading-relaxed text-white/65">
-              Live online yoga for anyone willing to begin. Roll out a mat, wherever you are, and
-              climb inward.
+              {t.footer.blurb}
             </p>
 
             <ul className="mt-7 flex items-center gap-3">
@@ -74,7 +75,7 @@ export function Footer() {
           {/* --- Quick links ---------------------------------------------- */}
           <nav aria-label="Footer">
             <h2 className="font-sans text-xs font-medium tracking-[0.2em] text-white/45 uppercase">
-              Explore
+              {t.footer.explore}
             </h2>
             <ul className="mt-5 space-y-3">
               {navLinks.map((link) => (
@@ -83,7 +84,7 @@ export function Footer() {
                     href={`#${link.id}`}
                     className="text-[0.95rem] text-white/70 transition-colors duration-300 hover:text-accent"
                   >
-                    {link.label}
+                    {t.nav[link.id]}
                   </a>
                 </li>
               ))}
@@ -93,18 +94,18 @@ export function Footer() {
           {/* --- Get in touch ---------------------------------------------- */}
           <div>
             <h2 className="font-sans text-xs font-medium tracking-[0.2em] text-white/45 uppercase">
-              Get in touch
+              {t.footer.getInTouch}
             </h2>
             <ul className="mt-5 space-y-3 text-[0.95rem]">
               <li>
                 <a
-                  href={buildWhatsAppLink(messages.general)}
+                  href={buildWhatsAppLink(t.whatsapp.general)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-white/70 transition-colors duration-300 hover:text-accent"
                 >
                   <Icon name="whatsapp" size={17} />
-                  WhatsApp us
+                  {t.footer.whatsappUs}
                 </a>
               </li>
               <li>
@@ -116,21 +117,21 @@ export function Footer() {
                   {brand.email}
                 </a>
               </li>
-              <li className="text-white/55">Live on {brand.platform}</li>
+              <li className="text-white/55">{t.footer.liveOn} {brand.platform}</li>
             </ul>
           </div>
         </div>
 
         {/* --- Closing line ---------------------------------------------- */}
         <p className="mt-14 border-t border-white/10 pt-10 text-center font-display text-2xl leading-relaxed text-white/85 italic sm:text-[1.75rem]">
-          May your breath be steady, your shoulders soft,
-          <br className="hidden sm:block" /> and the climb gentler than you feared.
+          {t.footer.closing[0]}
+          <br className="hidden sm:block" /> {t.footer.closing[1]}
         </p>
 
         {/* --- Display preferences ----------------------------------------- */}
         <div className="mt-12 flex flex-col items-center justify-center gap-4 border-t border-white/10 pt-10 sm:flex-row">
           <span className="text-xs tracking-[0.18em] text-white/45 uppercase">
-            Display
+            {t.footer.display}
           </span>
           <ThemeToggle compact />
           <MotionToggle />
@@ -139,14 +140,14 @@ export function Footer() {
         {/* --- Legal line -------------------------------------------------- */}
         <div className="mt-10 flex flex-col items-center justify-between gap-4 text-xs text-white/45 sm:flex-row">
           <p>
-            © {year} {brand.name}. All rights reserved.
+            © {year} {brand.name}. {t.footer.rights}
           </p>
           <a
             href="#top"
             className="inline-flex items-center gap-2 transition-colors duration-300 hover:text-accent"
           >
             <Icon name="arrowUp" size={14} />
-            Back to the top
+            {t.footer.backToTop}
           </a>
         </div>
       </div>

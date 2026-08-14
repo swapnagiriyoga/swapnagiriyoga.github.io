@@ -9,12 +9,14 @@ import Footer from './components/Footer.jsx';
 import FloatingWhatsApp from './components/FloatingWhatsApp.jsx';
 import BackToTop from './components/BackToTop.jsx';
 import ScrollProgress from './components/ScrollProgress.jsx';
+import { useTranslation } from './i18n/index.js';
 
 /**
  * Swapnagiri Yoga — single-page marketing site.
  * Sections appear here in the order they are read.
  */
 export default function App() {
+  const { t } = useTranslation();
   return (
     <>
       {/* Keyboard users land here first. */}
@@ -22,7 +24,7 @@ export default function App() {
         href="#main"
         className="sr-only rounded-pill bg-cta px-5 py-3 text-sm text-cta-fg focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[70]"
       >
-        Skip to main content
+        {t.skipLink}
       </a>
 
       <ScrollProgress />

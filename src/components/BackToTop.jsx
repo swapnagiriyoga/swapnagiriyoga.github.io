@@ -1,6 +1,7 @@
 import Icon from './ui/Icon.jsx';
 import { useScrolled } from '../hooks/useScrolled.js';
 import { useMotionPreference } from '../hooks/useMotionPreference.js';
+import { useTranslation } from '../i18n/index.js';
 
 /**
  * Returns to the top of the page. Sits directly above the WhatsApp bubble and
@@ -11,6 +12,7 @@ import { useMotionPreference } from '../hooks/useMotionPreference.js';
  * the viewport scrolled away from their focus.
  */
 export function BackToTop() {
+  const { t } = useTranslation();
   const visible = useScrolled(600);
   const { reduced } = useMotionPreference();
 
@@ -27,7 +29,7 @@ export function BackToTop() {
     <button
       type="button"
       onClick={onClick}
-      aria-label="Back to the top of the page"
+      aria-label={t.floating.backToTopLabel}
       tabIndex={visible ? undefined : -1}
       aria-hidden={visible ? undefined : 'true'}
       className={`fixed right-5 bottom-20 z-40 inline-flex rounded-pill border border-line bg-card/90 p-3 text-brand shadow-soft backdrop-blur-sm transition-all duration-500 hover:-translate-y-0.5 hover:border-accent hover:shadow-lift sm:right-8 sm:bottom-24 ${

@@ -1,45 +1,20 @@
 import Section from './ui/Section.jsx';
 import Reveal from './ui/Reveal.jsx';
+import { useTranslation } from '../i18n/index.js';
 import peaceImg from '../assets/value-peace.png';
 import mindfulnessImg from '../assets/value-mindfulness.png';
 import fitnessImg from '../assets/value-fitness.png';
 
-/**
- * The three brand values.
- * Each illustration is a transparent PNG, so it picks up the soft lavender
- * gradient of the tile behind it and the set reads as one family.
- */
-const values = [
-  {
-    image: peaceImg,
-    alt: 'A lotus flower opening on still water, sending out gentle ripples',
-    title: 'Peace',
-    body: 'Stillness is not the absence of noise — it is the space you learn to keep underneath it. We practise finding that space and returning to it, again and again.',
-  },
-  {
-    image: mindfulnessImg,
-    alt: 'A figure seated cross-legged in meditation, encircled by soft rings of calm',
-    title: 'Mindfulness',
-    body: 'Attention is the whole practice. When breath and movement travel together, the mind stops racing ahead and settles where you already are.',
-  },
-  {
-    image: fitnessImg,
-    alt: 'A figure balancing in tree pose before a soft mountain peak',
-    title: 'Fitness',
-    body: 'Strength here is quiet and lasting — open hips, a steady spine, deeper breath. You feel it long after the mat is away.',
-  },
-];
+/** Illustrations stay put; only the words change with the language. */
+const VALUE_IMAGES = [peaceImg, mindfulnessImg, fitnessImg];
 
 export function About() {
+  const { t } = useTranslation();
+
   return (
-    <Section
-      id="about"
-      tone="alt"
-      eyebrow="Our Philosophy"
-      title="The mountain you climb is your own"
-    >
+    <Section id="about" tone="alt" eyebrow={t.about.eyebrow} title={t.about.title}>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-        {values.map((value, index) => (
+        {t.about.values.map((value, index) => (
           <Reveal
             key={value.title}
             delay={index * 130}
@@ -51,13 +26,12 @@ export function About() {
               className="absolute inset-x-8 -top-px h-px bg-linear-to-r from-transparent via-accent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
             />
 
-            {/* Illustration tile */}
             {/* The three illustrations carry different amounts of internal
                 margin, so the tile is padded to sit them at a consistent
                 visual size rather than letting each fill its own canvas. */}
             <div className="mx-auto mb-7 aspect-square w-40 overflow-hidden rounded-full bg-linear-to-br from-surface-alt via-card to-wash/30 p-4 ring-1 ring-accent/20 transition-transform duration-500 group-hover:scale-105 sm:w-44">
               <img
-                src={value.image}
+                src={VALUE_IMAGES[index]}
                 alt={value.alt}
                 width="512"
                 height="512"

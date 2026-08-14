@@ -29,8 +29,13 @@
     -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!--
+      Cormorant and Inter carry no Devanagari glyphs, so Hindi and Marathi would
+      fall back to whatever the OS happens to have. The Noto Devanagari pair is
+      loaded alongside them and index.css switches to it on [lang="hi"|"mr"].
+    -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=Noto+Serif+Devanagari:wght@400;500;600&family=Noto+Sans+Devanagari:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
 
@@ -57,6 +62,11 @@
 
           if (localStorage.getItem('swapnagiri-motion') === 'reduce') {
             document.documentElement.classList.add('force-reduce-motion');
+          }
+
+          var lang = localStorage.getItem('swapnagiri-lang');
+          if (lang === 'hi' || lang === 'mr') {
+            document.documentElement.setAttribute('lang', lang);
           }
         } catch (e) {
           document.documentElement.setAttribute('data-theme', 'light');

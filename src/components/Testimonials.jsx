@@ -1,17 +1,19 @@
-import { useCallback, useEffect, useId, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useState } from 'react';
 import Section from './ui/Section.jsx';
 import Reveal from './ui/Reveal.jsx';
 import Icon from './ui/Icon.jsx';
 import { useReducedMotion } from '../hooks/useReducedMotion.js';
-import { testimonials } from '../data/testimonials.js';
+import { useTranslation } from '../i18n/index.js';
 
 const AUTOPLAY_MS = 7000;
 
 export function Testimonials() {
+  const { t } = useTranslation();
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const reducedMotion = useReducedMotion();
   const carouselId = useId();
+  const testimonials = t.testimonials.items;
   const total = testimonials.length;
 
   const goTo = useCallback((next) => setIndex(((next % total) + total) % total), [total]);
@@ -41,15 +43,15 @@ export function Testimonials() {
     <Section
       id="testimonials"
       tone="alt"
-      eyebrow="Student Voices"
-      title="Quiet changes, in their own words"
-      lead="No before-and-after photographs. Just people who found an hour that belongs to them."
+      eyebrow={t.testimonials.eyebrow}
+      title={t.testimonials.title}
+      lead={t.testimonials.lead}
     >
       <Reveal
         className="relative mx-auto max-w-3xl"
         role="region"
         aria-roledescription="carousel"
-        aria-label="Student testimonials"
+        aria-label={t.testimonials.regionLabel}
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
         onFocusCapture={() => setPaused(true)}
@@ -84,7 +86,7 @@ export function Testimonials() {
                   key={item.name}
                   role="group"
                   aria-roledescription="slide"
-                  aria-label={`${i + 1} of ${total}`}
+                  aria-label={`${i + 1} ${t.testimonials.of} ${total}`}
                   inert={!isActive}
                   className={`col-start-1 row-start-1 text-center transition-opacity duration-500 ease-out ${
                     isActive ? 'opacity-100' : 'pointer-events-none opacity-0'
@@ -111,7 +113,7 @@ export function Testimonials() {
             type="button"
             onClick={prev}
             aria-controls={carouselId}
-            aria-label="Previous testimonial"
+            aria-label={t.testimonials.previous}
             className="rounded-pill border border-accent/40 bg-card p-3 text-brand-deep shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:shadow-lift"
           >
             <Icon name="chevronLeft" size={18} />
@@ -125,12 +127,10 @@ export function Testimonials() {
                   type="button"
                   onClick={() => goTo(i)}
                   aria-controls={carouselId}
-                  aria-label={`Show testimonial ${i + 1} of ${total}`}
+                  aria-label={`${t.testimonials.show} ${i + 1} ${t.testimonials.of} ${total}`}
                   aria-current={i === index ? 'true' : undefined}
                   className={`block h-2.5 rounded-pill transition-all duration-400 ${
-                    i === index
-                      ? 'w-8 bg-brand'
-                      : 'w-2.5 bg-accent/45 hover:bg-accent'
+                    i === index ? 'w-8 bg-brand' : 'w-2.5 bg-accent/45 hover:bg-accent'
                   }`}
                 />
               </li>
@@ -141,7 +141,7 @@ export function Testimonials() {
             type="button"
             onClick={next}
             aria-controls={carouselId}
-            aria-label="Next testimonial"
+            aria-label={t.testimonials.next}
             className="rounded-pill border border-accent/40 bg-card p-3 text-brand-deep shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:shadow-lift"
           >
             <Icon name="chevronRight" size={18} />

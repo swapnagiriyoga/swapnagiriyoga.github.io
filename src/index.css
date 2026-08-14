@@ -147,6 +147,26 @@ html[data-theme='dark'] {
     text-wrap: pretty;
   }
 
+  /* --- Devanagari -------------------------------------------------------
+     Cormorant and Inter have no Devanagari coverage, so Hindi and Marathi
+     swap to the Noto pair. Devanagari needs a little more vertical room than
+     Latin at the same size, hence the slightly looser line-height. */
+  :where(html[lang='hi'], html[lang='mr']) body {
+    font-family: 'Noto Sans Devanagari', var(--font-sans);
+    line-height: 1.85;
+  }
+
+  :where(html[lang='hi'], html[lang='mr']) :is(h1, h2, h3, h4) {
+    font-family: 'Noto Serif Devanagari', var(--font-display);
+    line-height: 1.35;
+  }
+
+  /* The display serif is set in italic in a few places; Devanagari has no
+     italic form, so a synthesised slant just looks broken. */
+  :where(html[lang='hi'], html[lang='mr']) :is(h1, h2, h3, p, blockquote) {
+    font-style: normal;
+  }
+
   /* A single, consistent, always-visible focus ring. */
   :focus-visible {
     outline: 2px solid var(--color-accent-2);

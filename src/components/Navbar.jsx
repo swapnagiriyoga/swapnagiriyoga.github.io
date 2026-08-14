@@ -2,15 +2,17 @@ import { useEffect, useId, useRef, useState } from 'react';
 import Icon from './ui/Icon.jsx';
 import Logo from './ui/Logo.jsx';
 import ThemeToggle from './ui/ThemeToggle.jsx';
+import LanguageToggle from './ui/LanguageToggle.jsx';
 import WhatsAppCTA from './ui/WhatsAppCTA.jsx';
 import { useScrolled } from '../hooks/useScrolled.js';
 import { useActiveSection } from '../hooks/useActiveSection.js';
-import { messages } from '../lib/whatsapp.js';
+import { useTranslation } from '../i18n/index.js';
 import { brand, navLinks } from '../site.config.js';
 
 const SECTION_IDS = navLinks.map((link) => link.id);
 
 export function Navbar() {
+  const { t } = useTranslation();
   const scrolled = useScrolled(24);
   const activeId = useActiveSection(SECTION_IDS);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -85,7 +87,7 @@ export function Navbar() {
         <a
           href="#top"
           className="rounded-soft transition-opacity duration-300 hover:opacity-80"
-          aria-label={`${brand.name} — back to top`}
+          aria-label={`${brand.name} — ${t.nav.backToTop}`}
         >
           {/* The banner carries its own internal margin, so it is set larger
               than a tight lockup would need in order to read at the same size. */}
@@ -105,7 +107,7 @@ export function Navbar() {
                     isActive ? 'text-brand' : 'text-ink/75'
                   }`}
                 >
-                  {link.label}
+                  {t.nav[link.id]}
                   <span
                     aria-hidden="true"
                     className={`absolute inset-x-4 -bottom-0.5 h-px origin-center bg-accent transition-transform duration-300 ${
@@ -119,9 +121,10 @@ export function Navbar() {
         </ul>
 
         <div className="hidden items-center gap-3 lg:flex">
+          <LanguageToggle />
           <ThemeToggle compact />
-          <WhatsAppCTA message={messages.startJourney} size="sm">
-            Book a Session
+          <WhatsAppCTA message={t.whatsapp.startJourney} size="sm">
+            {t.nav.book}
           </WhatsAppCTA>
         </div>
 
@@ -135,7 +138,7 @@ export function Navbar() {
           className="rounded-pill border border-accent/40 bg-card/70 p-2.5 text-brand-deep transition-colors duration-300 hover:bg-card lg:hidden"
         >
           <Icon name={menuOpen ? 'close' : 'menu'} size={22} />
-          <span className="sr-only">{menuOpen ? 'Close menu' : 'Open menu'}</span>
+          <span className="sr-only">{menuOpen ? t.nav.closeMenu : t.nav.openMenu}</span>
         </button>
       </nav>
 
@@ -156,20 +159,21 @@ export function Navbar() {
                   activeId === link.id ? 'text-brand' : 'text-ink'
                 }`}
               >
-                {link.label}
+                {t.nav[link.id]}
               </a>
             </li>
           ))}
           <li className="mt-3">
             <WhatsAppCTA
-              message={messages.startJourney}
+              message={t.whatsapp.startJourney}
               className="w-full"
               onClick={() => setMenuOpen(false)}
             >
-              Book a Session
+              {t.nav.book}
             </WhatsAppCTA>
           </li>
           <li className="mt-4 flex justify-center border-t border-line pt-4">
+            <LanguageToggle />
             <ThemeToggle />
           </li>
         </ul>

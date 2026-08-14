@@ -4,8 +4,9 @@ import Reveal from './ui/Reveal.jsx';
 import Icon from './ui/Icon.jsx';
 import Button from './ui/Button.jsx';
 import WhatsAppCTA from './ui/WhatsAppCTA.jsx';
-import { buildWhatsAppLink, messages } from '../lib/whatsapp.js';
+import { buildWhatsAppLink } from '../lib/whatsapp.js';
 import { sendContactMessage } from '../lib/contact.js';
+import { useTranslation } from '../i18n/index.js';
 import { brand } from '../site.config.js';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -22,6 +23,7 @@ const fieldClass =
  * `lib/contact.js` and the notes in `site.config.js`.
  */
 function ContactForm() {
+  const { t } = useTranslation();
   const [values, setValues] = useState({ name: '', email: '', message: '' });
   const [errors, setErrors] = useState({});
   /** 'idle' | 'sending' | 'sent' | 'error' */
@@ -37,10 +39,10 @@ function ContactForm() {
 
   const validate = () => {
     const next = {};
-    if (!values.name.trim()) next.name = 'Please tell us your name.';
-    if (!values.email.trim()) next.email = 'We need an email to reply to.';
-    else if (!EMAIL_PATTERN.test(values.email)) next.email = 'That email does not look quite right.';
-    if (!values.message.trim()) next.message = 'Let us know how we can help.';
+    if (!values.name.trim()) next.name = t.contact.errors.name;
+    if (!values.email.trim()) next.email = t.contact.errors.emailMissing;
+    else if (!EMAIL_PATTERN.test(values.email)) next.email = t.contact.errors.emailInvalid;
+    if (!values.message.trim()) next.message = t.contact.errors.message;
     return next;
   };
 
@@ -77,14 +79,14 @@ function ContactForm() {
         <span className="rounded-pill bg-surface-alt p-4 text-accent-2">
           <Icon name="check" size={30} />
         </span>
-        <h3 className="mt-6 text-2xl">Thank you, {values.name.split(' ')[0]}</h3>
+        <h3 className="mt-6 text-2xl">
+          {t.contact.thankYou} {values.name.split(' ')[0]}
+        </h3>
         <p className="mt-3 max-w-sm text-[0.95rem] leading-relaxed text-ink/75">
-          {sentVia === 'mailto'
-            ? 'We have opened your email app with the message ready — press send there and it will reach us. If nothing opened, WhatsApp is the quickest way through.'
-            : 'Your message has landed. We usually reply within a day — often much sooner. If you would rather not wait, WhatsApp is the quickest way to reach us.'}
+          {sentVia === 'mailto' ? t.contact.sentBodyMailto : t.contact.sentBody}
         </p>
         <div className="mt-7 flex flex-wrap justify-center gap-3">
-          <WhatsAppCTA message={messages.general}>Continue on WhatsApp</WhatsAppCTA>
+          <WhatsAppCTA message={t.whatsapp.general}>{t.contact.continueWhatsApp}</WhatsAppCTA>
           <Button
             variant="ghost"
             onClick={() => {
@@ -92,7 +94,7 @@ function ContactForm() {
               setValues({ name: '', email: '', message: '' });
             }}
           >
-            Send another message
+            {t.contact.sendAnother}
           </Button>
         </div>
       </div>
@@ -104,7 +106,7 @@ function ContactForm() {
       {/* --- Name ------------------------------------------------------- */}
       <div>
         <label htmlFor="contact-name" className="mb-2 block text-sm font-medium text-brand-deep">
-          Your name
+          {t.contact.nameLabel}
         </label>
         <input
           id="contact-name"
@@ -115,7 +117,7 @@ function ContactForm() {
           onChange={update('name')}
           aria-invalid={errors.name ? 'true' : undefined}
           aria-describedby={errors.name ? 'contact-name-error' : undefined}
-          placeholder="e.g. Priya Sharma"
+          placeholder={t.contact.namePlaceholder}
           className={`${fieldClass} ${errors.name ? 'border-brand-deep' : 'border-line'}`}
         />
         {errors.name && (
@@ -128,7 +130,7 @@ function ContactForm() {
       {/* --- Email ------------------------------------------------------- */}
       <div>
         <label htmlFor="contact-email" className="mb-2 block text-sm font-medium text-brand-deep">
-          Email address
+          {t.contact.emailLabel}
         </label>
         <input
           id="contact-email"
@@ -139,7 +141,7 @@ function ContactForm() {
           onChange={update('email')}
           aria-invalid={errors.email ? 'true' : undefined}
           aria-describedby={errors.email ? 'contact-email-error' : undefined}
-          placeholder="you@example.com"
+          placeholder={t.contact.emailPlaceholder}
           className={`${fieldClass} ${errors.email ? 'border-brand-deep' : 'border-line'}`}
         />
         {errors.email && (
@@ -152,7 +154,7 @@ function ContactForm() {
       {/* --- Message ------------------------------------------------------ */}
       <div>
         <label htmlFor="contact-message" className="mb-2 block text-sm font-medium text-brand-deep">
-          How can we help?
+          {t.contact.messageLabel}
         </label>
         <textarea
           id="contact-message"
@@ -162,7 +164,7 @@ function ContactForm() {
           onChange={update('message')}
           aria-invalid={errors.message ? 'true' : undefined}
           aria-describedby={errors.message ? 'contact-message-error' : undefined}
-          placeholder="I'm completely new to yoga and wondering where to start…"
+          placeholder={t.contact.messagePlaceholder}
           className={`${fieldClass} resize-y ${
             errors.message ? 'border-brand-deep' : 'border-line'
           }`}
@@ -181,16 +183,18 @@ function ContactForm() {
           role="alert"
           className="flex flex-wrap items-center gap-x-2 gap-y-1 rounded-soft bg-surface-alt px-4 py-3.5 text-sm text-brand-deep ring-1 ring-accent/30"
         >
-          <span>{sendError} Please try again, or</span>
+          <span>
+            {sendError} {t.contact.sendFailedPrefix}
+          </span>
           <a
-            href={buildWhatsAppLink(messages.general)}
+            href={buildWhatsAppLink(t.whatsapp.general)}
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium underline decoration-accent underline-offset-4"
           >
-            message us on WhatsApp
+            {t.contact.sendFailedLink}
           </a>
-          <span>instead.</span>
+          <span>{t.contact.sendFailedSuffix}</span>
         </p>
       )}
 
@@ -199,15 +203,16 @@ function ContactForm() {
         disabled={status === 'sending'}
         className="inline-flex w-full items-center justify-center gap-2 rounded-pill bg-cta px-6 py-3.5 text-sm font-medium tracking-wide text-cta-fg shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:bg-cta-hover hover:shadow-glow disabled:pointer-events-none disabled:opacity-60"
       >
-        {status === 'sending' ? 'Sending…' : 'Send message'}
+        {status === 'sending' ? t.contact.sending : t.contact.send}
         <Icon name="mail" size={17} />
       </button>
     </form>
   );
 }
 
-/** Newsletter signup — same no-backend pattern as the contact form. */
+/** Newsletter signup — front-end only, no backend. */
 function Newsletter() {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [subscribed, setSubscribed] = useState(false);
@@ -215,7 +220,7 @@ function Newsletter() {
   const onSubmit = (event) => {
     event.preventDefault();
     if (!EMAIL_PATTERN.test(email)) {
-      setError('Please enter a valid email address.');
+      setError(t.contact.newsletterError);
       return;
     }
     setError('');
@@ -227,22 +232,19 @@ function Newsletter() {
       <span className="inline-flex rounded-2xl bg-card p-3 text-accent-2 ring-1 ring-accent/25">
         <Icon name="spark" size={24} strokeWidth={1.4} />
       </span>
-      <h3 className="mt-5 text-2xl">The Morning Note</h3>
-      <p className="mt-2 text-[0.95rem] leading-relaxed text-ink/75">
-        One short letter a month: a breathing practice, a pose worth revisiting, and a small
-        reflection to carry into your week. No noise, and unsubscribe in one click.
-      </p>
+      <h3 className="mt-5 text-2xl">{t.contact.newsletterTitle}</h3>
+      <p className="mt-2 text-[0.95rem] leading-relaxed text-ink/75">{t.contact.newsletterBody}</p>
 
       <div aria-live="polite">
         {subscribed ? (
           <p className="mt-6 flex items-center gap-2.5 rounded-soft bg-card px-4 py-3.5 text-[0.95rem] text-brand-deep ring-1 ring-accent/30">
             <Icon name="check" size={19} className="shrink-0 text-accent-2" />
-            You're on the list. See you at dawn.
+            {t.contact.subscribed}
           </p>
         ) : (
           <form onSubmit={onSubmit} noValidate className="mt-6">
             <label htmlFor="newsletter-email" className="sr-only">
-              Email address for the monthly newsletter
+              {t.contact.newsletterLabel}
             </label>
             <div className="flex flex-col gap-3 sm:flex-row">
               <input
@@ -256,14 +258,14 @@ function Newsletter() {
                 }}
                 aria-invalid={error ? 'true' : undefined}
                 aria-describedby={error ? 'newsletter-error' : undefined}
-                placeholder="you@example.com"
+                placeholder={t.contact.emailPlaceholder}
                 className={`${fieldClass} ${error ? 'border-brand-deep' : 'border-line'}`}
               />
               <button
                 type="submit"
                 className="shrink-0 rounded-pill bg-cta px-6 py-3 text-sm font-medium tracking-wide text-cta-fg shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:bg-cta-hover hover:shadow-glow"
               >
-                Subscribe
+                {t.contact.subscribe}
               </button>
             </div>
             {error && (
@@ -279,13 +281,15 @@ function Newsletter() {
 }
 
 export function Contact() {
+  const { t } = useTranslation();
+
   return (
     <Section
       id="contact"
       tone="alt"
-      eyebrow="Say Hello"
-      title="Let's find your starting point"
-      lead="Tell us where you are — brand new, coming back after years away, or deep in a practice already — and the times your week tends to allow. We will shape the rest around it."
+      eyebrow={t.contact.eyebrow}
+      title={t.contact.title}
+      lead={t.contact.lead}
     >
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:gap-12">
         {/* --- Form ------------------------------------------------------- */}
@@ -296,10 +300,9 @@ export function Contact() {
         {/* --- Direct routes + newsletter ---------------------------------- */}
         <div className="space-y-6">
           <Reveal delay={110} className="rounded-card border border-line bg-card p-8 shadow-soft">
-            <h3 className="text-2xl">Reach us directly</h3>
+            <h3 className="text-2xl">{t.contact.directTitle}</h3>
             <p className="mt-2 text-[0.95rem] leading-relaxed text-ink/75">
-              WhatsApp is where everything gets sorted — session timings, what it costs, your Google
-              Meet link, and any question you have not asked yet.
+              {t.contact.directBody}
             </p>
 
             <dl className="mt-6 space-y-4 text-[0.95rem]">
@@ -326,13 +329,15 @@ export function Contact() {
                 <dt className="mt-0.5 shrink-0 text-accent-2">
                   <Icon name="clock" size={20} title="Hours" />
                 </dt>
-                <dd className="text-ink/80">Replies daily, 8 AM – 8 PM {brand.timezone}</dd>
+                <dd className="text-ink/80">
+                  {t.contact.repliesDaily} {brand.timezone}
+                </dd>
               </div>
             </dl>
 
             <div className="mt-7">
-              <WhatsAppCTA message={messages.general} className="w-full">
-                Message us on WhatsApp
+              <WhatsAppCTA message={t.whatsapp.general} className="w-full">
+                {t.contact.whatsappCta}
               </WhatsAppCTA>
             </div>
           </Reveal>

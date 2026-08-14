@@ -4,17 +4,13 @@ import Icon from './ui/Icon.jsx';
 import WhatsAppCTA from './ui/WhatsAppCTA.jsx';
 import MistyPeaks from './MistyPeaks.jsx';
 import { useReducedMotion } from '../hooks/useReducedMotion.js';
-import { messages } from '../lib/whatsapp.js';
+import { useTranslation } from '../i18n/index.js';
 import { brand } from '../site.config.js';
 
-/** Small trust markers under the hero CTAs. */
-const highlights = [
-  { icon: 'calendar', label: 'Sessions at times that suit you' },
-  { icon: 'signal', label: 'Every level welcome' },
-  { icon: 'lotus', label: `Live on ${brand.platform}` },
-];
+const HIGHLIGHT_ICONS = ['calendar', 'signal', 'lotus'];
 
 export function Hero() {
+  const { t } = useTranslation();
   const reducedMotion = useReducedMotion();
   const [scrollY, setScrollY] = useState(0);
 
@@ -62,9 +58,7 @@ export function Hero() {
 
       {/* --- Content ------------------------------------------------------ */}
       <div className="relative mx-auto w-full max-w-4xl px-6 text-center lg:px-8">
-        <p className="eyebrow reveal is-visible mb-6">
-          Live online yoga · Practise from home
-        </p>
+        <p className="eyebrow reveal is-visible mb-6">{t.hero.eyebrow}</p>
 
         <h1 className="text-5xl leading-[1.05] text-ink-heading sm:text-6xl lg:text-7xl">
           <span className="block font-light">{brand.name}</span>
@@ -74,26 +68,26 @@ export function Hero() {
         </h1>
 
         <p className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-ink/75 sm:text-lg">
-          Swapnagiri means <em className="text-brand-deep not-italic">dream mountain</em>. Every
-          practice is a small ascent — breath by breath, you climb inward and arrive somewhere
-          quieter. Sessions are arranged around your week, one conversation at a time.
+          {t.hero.taglineLead}{' '}
+          <em className="text-brand-deep not-italic">{t.hero.taglineTerm}</em>
+          {t.hero.intro}
         </p>
 
         <div className="mt-11 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <WhatsAppCTA message={messages.startJourney} size="lg">
-            Start Your Journey
+          <WhatsAppCTA message={t.whatsapp.startJourney} size="lg">
+            {t.hero.primaryCta}
           </WhatsAppCTA>
           <Button href="#about" variant="outline" size="lg">
-            Our Philosophy
+            {t.hero.secondaryCta}
             <Icon name="chevronDown" size={16} />
           </Button>
         </div>
 
         <ul className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-          {highlights.map((item) => (
-            <li key={item.label} className="flex items-center gap-2.5 text-sm text-ink/70">
-              <Icon name={item.icon} size={19} className="text-accent-2" />
-              {item.label}
+          {t.hero.highlights.map((label, index) => (
+            <li key={label} className="flex items-center gap-2.5 text-sm text-ink/70">
+              <Icon name={HIGHLIGHT_ICONS[index]} size={19} className="text-accent-2" />
+              {label}
             </li>
           ))}
         </ul>
@@ -104,9 +98,9 @@ export function Hero() {
         href="#about"
         className="animate-scroll-cue absolute bottom-7 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1.5 text-brand/70 transition-colors hover:text-brand sm:flex"
       >
-        <span className="text-[0.65rem] tracking-[0.25em] uppercase">Breathe in</span>
+        <span className="text-[0.65rem] tracking-[0.25em] uppercase">{t.hero.scrollCue}</span>
         <Icon name="chevronDown" size={18} />
-        <span className="sr-only">Scroll to the About section</span>
+        <span className="sr-only">{t.hero.scrollCueLabel}</span>
       </a>
     </section>
   );

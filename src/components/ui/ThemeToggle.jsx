@@ -1,12 +1,9 @@
 import { useEffect, useRef } from 'react';
 import Icon from './Icon.jsx';
 import { useTheme } from '../../hooks/useTheme.js';
+import { useTranslation } from '../../i18n/index.js';
 
-const LABELS = {
-  light: { icon: 'sun', text: 'Light' },
-  dark: { icon: 'moon', text: 'Dark' },
-  system: { icon: 'system', text: 'System' },
-};
+const ICONS = { light: 'sun', dark: 'moon', system: 'system' };
 
 const ORDER = ['light', 'dark', 'system'];
 
@@ -24,6 +21,12 @@ const ORDER = ['light', 'dark', 'system'];
  */
 export function ThemeToggle({ compact = false, className = '' }) {
   const { mode, resolved, setMode } = useTheme();
+  const { t } = useTranslation();
+  const LABELS = {
+    light: { icon: ICONS.light, text: t.footer.themeLight },
+    dark: { icon: ICONS.dark, text: t.footer.themeDark },
+    system: { icon: ICONS.system, text: t.footer.themeSystem },
+  };
   const groupRef = useRef(null);
   const movedByKeyboard = useRef(false);
 
@@ -71,7 +74,7 @@ export function ThemeToggle({ compact = false, className = '' }) {
     <div
       ref={groupRef}
       role="radiogroup"
-      aria-label="Colour theme"
+      aria-label={t.footer.themeLabel}
       onKeyDown={onKeyDown}
       className={`inline-flex items-center gap-0.5 rounded-pill border border-line bg-card/70 p-1 backdrop-blur-sm ${className}`}
     >
