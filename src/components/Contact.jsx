@@ -210,76 +210,6 @@ function ContactForm() {
   );
 }
 
-/** Newsletter signup — front-end only, no backend. */
-function Newsletter() {
-  const { t } = useTranslation();
-  const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
-
-  const onSubmit = (event) => {
-    event.preventDefault();
-    if (!EMAIL_PATTERN.test(email)) {
-      setError(t.contact.newsletterError);
-      return;
-    }
-    setError('');
-    setSubscribed(true);
-  };
-
-  return (
-    <div className="rounded-card border border-accent/25 bg-linear-to-br from-surface-alt via-card to-card p-8 shadow-soft">
-      <span className="inline-flex rounded-2xl bg-card p-3 text-accent-2 ring-1 ring-accent/25">
-        <Icon name="spark" size={24} strokeWidth={1.4} />
-      </span>
-      <h3 className="mt-5 text-2xl">{t.contact.newsletterTitle}</h3>
-      <p className="mt-2 text-[0.95rem] leading-relaxed text-ink/75">{t.contact.newsletterBody}</p>
-
-      <div aria-live="polite">
-        {subscribed ? (
-          <p className="mt-6 flex items-center gap-2.5 rounded-soft bg-card px-4 py-3.5 text-[0.95rem] text-brand-deep ring-1 ring-accent/30">
-            <Icon name="check" size={19} className="shrink-0 text-accent-2" />
-            {t.contact.subscribed}
-          </p>
-        ) : (
-          <form onSubmit={onSubmit} noValidate className="mt-6">
-            <label htmlFor="newsletter-email" className="sr-only">
-              {t.contact.newsletterLabel}
-            </label>
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <input
-                id="newsletter-email"
-                type="email"
-                autoComplete="email"
-                value={email}
-                onChange={(event) => {
-                  setEmail(event.target.value);
-                  setError('');
-                }}
-                aria-invalid={error ? 'true' : undefined}
-                aria-describedby={error ? 'newsletter-error' : undefined}
-                placeholder={t.contact.emailPlaceholder}
-                className={`${fieldClass} ${error ? 'border-brand-deep' : 'border-line'}`}
-              />
-              <button
-                type="submit"
-                className="shrink-0 rounded-pill bg-cta px-6 py-3 text-sm font-medium tracking-wide text-cta-fg shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:bg-cta-hover hover:shadow-glow"
-              >
-                {t.contact.subscribe}
-              </button>
-            </div>
-            {error && (
-              <p id="newsletter-error" className="mt-2 text-sm text-brand-deep">
-                {error}
-              </p>
-            )}
-          </form>
-        )}
-      </div>
-    </div>
-  );
-}
-
 export function Contact() {
   const { t } = useTranslation();
 
@@ -297,8 +227,8 @@ export function Contact() {
           <ContactForm />
         </Reveal>
 
-        {/* --- Direct routes + newsletter ---------------------------------- */}
-        <div className="space-y-6">
+        {/* --- Direct routes ------------------------------------------------ */}
+        <div>
           <Reveal delay={110} className="rounded-card border border-line bg-card p-8 shadow-soft">
             <h3 className="text-2xl">{t.contact.directTitle}</h3>
             <p className="mt-2 text-[0.95rem] leading-relaxed text-ink/75">
@@ -340,10 +270,6 @@ export function Contact() {
                 {t.contact.whatsappCta}
               </WhatsAppCTA>
             </div>
-          </Reveal>
-
-          <Reveal delay={200}>
-            <Newsletter />
           </Reveal>
         </div>
       </div>

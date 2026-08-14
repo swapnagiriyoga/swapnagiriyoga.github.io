@@ -18,6 +18,8 @@ export const en = {
   },
 
   hero: {
+    brandName: 'Swapnagiri Yoga',
+    tagline: 'Find Your Inner Peak',
     eyebrow: 'Live online yoga · Practise from home',
     taglineLead: 'Swapnagiri means',
     taglineTerm: 'dream mountain',
@@ -162,13 +164,6 @@ export const en = {
       'WhatsApp is where everything gets sorted — session timings, what it costs, your Google Meet link, and any question you have not asked yet.',
     repliesDaily: 'Replies daily, 8 AM – 8 PM',
     whatsappCta: 'Message us on WhatsApp',
-    newsletterTitle: 'The Morning Note',
-    newsletterBody:
-      'One short letter a month: a breathing practice, a pose worth revisiting, and a small reflection to carry into your week. No noise, and unsubscribe in one click.',
-    newsletterLabel: 'Email address for the monthly newsletter',
-    subscribe: 'Subscribe',
-    subscribed: "You're on the list. See you at dawn.",
-    newsletterError: 'Please enter a valid email address.',
   },
 
   footer: {

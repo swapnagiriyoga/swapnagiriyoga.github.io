@@ -5,7 +5,6 @@ import WhatsAppCTA from './ui/WhatsAppCTA.jsx';
 import MistyPeaks from './MistyPeaks.jsx';
 import { useReducedMotion } from '../hooks/useReducedMotion.js';
 import { useTranslation } from '../i18n/index.js';
-import { brand } from '../site.config.js';
 
 const HIGHLIGHT_ICONS = ['calendar', 'signal', 'lotus'];
 
@@ -61,9 +60,9 @@ export function Hero() {
         <p className="eyebrow reveal is-visible mb-6">{t.hero.eyebrow}</p>
 
         <h1 className="text-5xl leading-[1.05] text-ink-heading sm:text-6xl lg:text-7xl">
-          <span className="block font-light">{brand.name}</span>
+          <span className="block font-light">{t.hero.brandName}</span>
           <span className="mt-3 block bg-linear-to-r from-brand via-accent-2 to-brand-deep bg-clip-text text-transparent italic">
-            {brand.tagline}
+            {t.hero.tagline}
           </span>
         </h1>
 
