@@ -147,26 +147,6 @@ html[data-theme='dark'] {
     text-wrap: pretty;
   }
 
-  /* --- Devanagari -------------------------------------------------------
-     Cormorant and Inter have no Devanagari coverage, so Hindi and Marathi
-     swap to the Noto pair. Devanagari needs a little more vertical room than
-     Latin at the same size, hence the slightly looser line-height. */
-  :where(html[lang='hi'], html[lang='mr']) body {
-    font-family: 'Noto Sans Devanagari', var(--font-sans);
-    line-height: 1.85;
-  }
-
-  :where(html[lang='hi'], html[lang='mr']) :is(h1, h2, h3, h4) {
-    font-family: 'Noto Serif Devanagari', var(--font-display);
-    line-height: 1.35;
-  }
-
-  /* The display serif is set in italic in a few places; Devanagari has no
-     italic form, so a synthesised slant just looks broken. */
-  :where(html[lang='hi'], html[lang='mr']) :is(h1, h2, h3, p, blockquote) {
-    font-style: normal;
-  }
-
   /* A single, consistent, always-visible focus ring. */
   :focus-visible {
     outline: 2px solid var(--color-accent-2);
@@ -222,6 +202,54 @@ html[data-theme='dark'] {
     filter: blur(70px);
     pointer-events: none;
   }
+}
+
+/* ==========================================================================
+   Devanagari (Hindi / Marathi)
+
+   Deliberately UNLAYERED. Tailwind puts its utilities in @layer utilities, and
+   layer order beats specificity outright — so anything written inside
+   @layer base loses to `leading-[1.05]` and `bg-clip-text` no matter how
+   specific the selector is. Unlayered rules sit above every layer, which is
+   what these need in order to win.
+   ========================================================================== */
+html[lang='hi'] body,
+html[lang='mr'] body {
+  font-family: 'Noto Sans Devanagari', var(--font-sans);
+}
+
+html[lang='hi'] :is(h1, h2, h3, h4),
+html[lang='mr'] :is(h1, h2, h3, h4) {
+  font-family: 'Noto Serif Devanagari', var(--font-display);
+  /* Devanagari stacks marks above and below the base glyph; the Latin
+     heading leading of 1.05 crops them off entirely. */
+  line-height: 1.5;
+}
+
+html[lang='hi'] :is(p, li, blockquote, label, figcaption),
+html[lang='mr'] :is(p, li, blockquote, label, figcaption) {
+  line-height: 1.8;
+}
+
+/* Devanagari has no italic form, so a browser-synthesised slant just smears
+   the matras. `.italic` is matched directly because the utility is applied to
+   inner spans, not only to the block elements. */
+html[lang='hi'] :is(h1, h2, h3, p, blockquote, em, span, .italic),
+html[lang='mr'] :is(h1, h2, h3, p, blockquote, em, span, .italic) {
+  font-style: normal;
+}
+
+/* Gradient text is clipped to the glyph outlines, but the background box only
+   covers the line box — so a matra rising above or dropping below it has no
+   gradient to show through, and disappears, because the text itself is
+   transparent. Devanagari gets a solid brand colour instead. */
+html[lang='hi'] .bg-clip-text,
+html[lang='mr'] .bg-clip-text {
+  background-image: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  color: var(--color-brand);
+  -webkit-text-fill-color: var(--color-brand);
 }
 
 /* ==========================================================================
