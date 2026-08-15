@@ -3,8 +3,15 @@
 Marketing website for **Swapnagiri Yoga** — live online yoga sessions.
 _"Find Your Inner Peak."_
 
-**Live at https://swapnagiriyoga.github.io/** — deployed automatically from
-`main` by [the Pages workflow](.github/workflows/deploy.yml).
+**Live at https://www.swapnagiriyoga.com** — deployed automatically from `main`
+by [the Pages workflow](.github/workflows/deploy.yml). Push to `main` and the
+site rebuilds and republishes in about a minute; there is no separate step.
+
+The custom domain is held in two places on purpose: GitHub's Pages settings,
+and [`public/CNAME`](public/CNAME). Vite copies that file into `dist/` on every
+build, so the domain survives each deploy — without it, publishing from a
+GitHub Actions artifact can drop the setting and take the domain offline. If
+the domain ever changes, change it in both places.
 
 Single-page React site: serene, light-led, mobile-first, and fully keyboard
 accessible. Sessions are arranged personally over WhatsApp — there is no fixed
