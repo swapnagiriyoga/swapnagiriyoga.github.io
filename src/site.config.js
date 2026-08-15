@@ -51,7 +51,12 @@ export const navLinks = [
 /** Social profiles shown in the footer. */
 export const socials = [
   { label: 'Instagram', icon: 'instagram', href: 'https://www.instagram.com/swapnagiriyoga/' },
-  // ⚠️ Best guess at the page URL, matching the Instagram handle — confirm the
-  // real one from the address bar of your Facebook page and correct it here.
-  { label: 'Facebook', icon: 'facebook', href: 'https://www.facebook.com/swapnagiriyoga' },
+  // The numeric ID is what Facebook gives a page until a username is claimed.
+  // If you later set one under Page settings, this can become the tidier
+  // https://www.facebook.com/swapnagiriyoga
+  {
+    label: 'Facebook',
+    icon: 'facebook',
+    href: 'https://www.facebook.com/profile.php?id=61593424499033',
+  },
 ];
