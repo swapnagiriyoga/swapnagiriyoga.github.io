@@ -126,7 +126,7 @@ export const en = {
         id: 'pricing',
         question: 'What does it cost?',
         answer:
-          'Message us on WhatsApp with what you are looking for and you will get a straight answer the same day.',
+          'Message us on WhatsApp with what you are looking for and we will send you the details the same day.',
       },
     ],
   },
