@@ -108,7 +108,7 @@ export const en = {
         id: 'scheduling',
         question: 'When do classes happen? Is there a fixed timetable?',
         answer:
-          'There is no fixed timetable. Sessions are arranged directly between you and your teacher, around the days and hours that genuinely work for your week — early mornings, evenings, weekends. Send a WhatsApp message with the times you have in mind and we will find a rhythm together.',
+          'Timings are flexible. Sessions are arranged directly between you and your teacher, around the days and hours that genuinely work for your week — early mornings, evenings, weekends. Send a WhatsApp message with the times you have in mind and we will find a rhythm together.',
       },
       {
         id: 'equipment',
