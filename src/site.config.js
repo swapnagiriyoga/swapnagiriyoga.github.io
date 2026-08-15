@@ -48,9 +48,10 @@ export const navLinks = [
   { id: 'contact', label: 'Contact' },
 ];
 
-/** Social profiles shown in the footer. Swap the hrefs for real accounts. */
+/** Social profiles shown in the footer. */
 export const socials = [
-  { label: 'Instagram', icon: 'instagram', href: 'https://instagram.com' },
-  { label: 'YouTube', icon: 'youtube', href: 'https://youtube.com' },
-  { label: 'Facebook', icon: 'facebook', href: 'https://facebook.com' },
+  { label: 'Instagram', icon: 'instagram', href: 'https://www.instagram.com/swapnagiriyoga/' },
+  // ⚠️ Best guess at the page URL, matching the Instagram handle — confirm the
+  // real one from the address bar of your Facebook page and correct it here.
+  { label: 'Facebook', icon: 'facebook', href: 'https://www.facebook.com/swapnagiriyoga' },
 ];

@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page not found — Swapnagiri Yoga</title>
+    <meta name="robots" content="noindex" />
+    <meta name="color-scheme" content="light dark" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Inter:wght@300;400;500&family=Noto+Serif+Devanagari:wght@400;500&family=Noto+Sans+Devanagari:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23F6EEFF'/%3E%3Cpath d='M4 24 L12 11 L17 18 L21 13 L28 24 Z' fill='%237B2CBF'/%3E%3Ccircle cx='23' cy='8' r='3' fill='%23C77DFF'/%3E%3C/svg%3E"
+    />
+
+    <!--
+      This page is deliberately standalone. GitHub Pages serves it for any
+      unmatched path, and it cannot rely on the app bundle: those filenames are
+      content-hashed and change on every build. So the palette, fonts and
+      artwork are all inlined here, mirroring index.css.
+    -->
+    <style>
+      :root {
+        --surface: #ffffff;
+        --surface-alt: #f6eeff;
+        --card: #ffffff;
+        --line: #f0e4fb;
+        --wash: #e0aaff;
+        --accent: #c77dff;
+        --accent-2: #9d4edd;
+        --brand: #7b2cbf;
+        --cta: #7b2cbf;
+        --cta-hover: #5a189a;
+        --cta-fg: #ffffff;
+        --ink-heading: #3c096c;
+        --ink: #240046;
+      }
+
+      html[data-theme='dark'] {
+        --surface: #120031;
+        --surface-alt: #190740;
+        --card: #1e0a4a;
+        --line: #34176b;
+        --wash: #7b2cbf;
+        --accent: #c77dff;
+        --accent-2: #e0aaff;
+        --brand: #d8a5ff;
+        --cta: #c77dff;
+        --cta-hover: #e0aaff;
+        --cta-fg: #1b0742;
+        --ink-heading: #f7f0ff;
+        --ink: #e4d7f5;
+        color-scheme: dark;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        padding: 2rem 1.5rem 4rem;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(to bottom, var(--surface), var(--surface-alt), var(--surface));
+        color: var(--ink);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.75;
+        text-align: center;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Devanagari has no coverage in Cormorant or Inter. */
+      html[lang='hi'] body,
+      html[lang='mr'] body {
+        font-family: 'Noto Sans Devanagari', sans-serif;
+        line-height: 1.85;
+      }
+      html[lang='hi'] h1,
+      html[lang='mr'] h1 {
+        font-family: 'Noto Serif Devanagari', serif;
+        line-height: 1.5;
+        font-style: normal;
+      }
+
+      .peaks {
+        position: absolute;
+        inset: auto 0 0 0;
+        width: 100%;
+        height: 55%;
+        pointer-events: none;
+      }
+
+      .orb {
+        position: absolute;
+        border-radius: 999px;
+        filter: blur(80px);
+        pointer-events: none;
+      }
+      .orb-a {
+        top: -6rem;
+        left: -5rem;
+        width: 24rem;
+        height: 24rem;
+        background: color-mix(in oklab, var(--wash) 45%, transparent);
+      }
+      .orb-b {
+        top: 3rem;
+        right: -6rem;
+        width: 20rem;
+        height: 20rem;
+        background: color-mix(in oklab, var(--accent) 25%, transparent);
+      }
+
+      .content {
+        position: relative;
+        max-width: 34rem;
+      }
+
+      .logo {
+        height: 3.5rem;
+        width: auto;
+        margin-bottom: 3rem;
+      }
+      html[data-theme='dark'] .logo-dark {
+        display: none;
+      }
+      html:not([data-theme='dark']) .logo-light {
+        display: none;
+      }
+
+      .code {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: clamp(4.5rem, 18vw, 8rem);
+        line-height: 1;
+        margin: 0;
+        color: var(--brand);
+        opacity: 0.35;
+        letter-spacing: 0.05em;
+      }
+
+      h1 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-weight: 400;
+        font-style: italic;
+        font-size: clamp(1.9rem, 6vw, 2.75rem);
+        line-height: 1.15;
+        color: var(--ink-heading);
+        margin: 0.5rem 0 0;
+      }
+
+      p {
+        margin: 1.25rem auto 0;
+        max-width: 30rem;
+        font-size: 1rem;
+        color: color-mix(in oklab, var(--ink) 75%, transparent);
+      }
+
+      .actions {
+        margin-top: 2.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: center;
+      }
+
+      a.button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        border-radius: 999px;
+        padding: 0.9rem 2rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        text-decoration: none;
+        background: var(--cta);
+        color: var(--cta-fg);
+        box-shadow: 0 4px 24px -8px rgb(36 0 70 / 0.25);
+        transition:
+          background-color 0.3s ease,
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+      a.button:hover {
+        background: var(--cta-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px -8px rgb(123 44 191 / 0.45);
+      }
+
+      a:focus-visible,
+      :focus-visible {
+        outline: 2px solid var(--accent-2);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+          animation: none !important;
+        }
+      }
+    </style>
+
+    <!-- Match the theme and language the visitor already chose on the site. -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('swapnagiri-theme') || 'system';
+          var dark =
+            stored === 'dark' ||
+            (stored === 'system' &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+
+          var lang = localStorage.getItem('swapnagiri-lang');
+          if (lang === 'hi' || lang === 'mr') {
+            document.documentElement.setAttribute('lang', lang);
+          }
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+  </head>
+
+  <body>
+    <div aria-hidden="true">
+      <span class="orb orb-a"></span>
+      <span class="orb orb-b"></span>
+    </div>
+
+    <!-- The same dream-mountain motif as the hero, simplified. -->
+    <svg class="peaks" viewBox="0 0 1440 500" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="far" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#E0AAFF" stop-opacity="0.34" />
+          <stop offset="100%" stop-color="#E0AAFF" stop-opacity="0.04" />
+        </linearGradient>
+        <linearGradient id="near" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#9D4EDD" stop-opacity="0.42" />
+          <stop offset="100%" stop-color="#7B2CBF" stop-opacity="0.06" />
+        </linearGradient>
+        <linearGradient id="veil" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--surface)" stop-opacity="0" />
+          <stop offset="100%" stop-color="var(--surface)" stop-opacity="1" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M0 300 L150 190 L260 250 L400 140 L520 235 L650 165 L790 260 L920 185 L1060 255 L1200 175 L1330 250 L1440 200 L1440 500 L0 500 Z"
+        fill="url(#far)"
+      />
+      <path
+        d="M0 500 L0 380 L140 300 L280 375 L420 285 L560 370 L700 300 L840 385 L980 310 L1120 380 L1270 300 L1440 370 L1440 500 Z"
+        fill="url(#near)"
+      />
+      <rect x="0" y="260" width="1440" height="240" fill="url(#veil)" />
+    </svg>
+
+    <main class="content">
+      <img class="logo logo-dark" src="/logo.png" alt="Swapnagiri Yoga" width="820" height="252" />
+      <img
+        class="logo logo-light"
+        src="/logo-light.png"
+        alt="Swapnagiri Yoga"
+        width="820"
+        height="252"
+      />
+
+      <p class="code" aria-hidden="true">404</p>
+      <h1 data-i18n="title">Off the path</h1>
+      <p data-i18n="body">
+        The page you were looking for isn't here. No harm done — the way back is one step away.
+      </p>
+
+      <div class="actions">
+        <a class="button" href="/" data-i18n="cta">Return home</a>
+      </div>
+    </main>
+
+    <script>
+      // Small enough to inline; the app's dictionaries live in the hashed
+      // bundle this page deliberately does not load.
+      (function () {
+        var copy = {
+          hi: {
+            title: 'रास्ता भटक गए',
+            body: 'आप जिस पृष्ठ की तलाश में थे, वह यहाँ नहीं है। कोई बात नहीं — वापसी का रास्ता बस एक कदम दूर है।',
+            cta: 'मुख्य पृष्ठ पर जाएँ',
+          },
+          mr: {
+            title: 'वाट चुकलात',
+            body: 'तुम्ही शोधत असलेले पान इथे नाही. काही हरकत नाही — परतीचा रस्ता अगदी जवळ आहे.',
+            cta: 'मुख्यपृष्ठावर जा',
+          },
+        };
+        var lang = document.documentElement.getAttribute('lang');
+        var strings = copy[lang];
+        if (!strings) return;
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          var key = el.getAttribute('data-i18n');
+          if (strings[key]) el.textContent = strings[key];
+        });
+        document.title = strings.title + ' — Swapnagiri Yoga';
+      })();
+    </script>
+  </body>
+</html>
