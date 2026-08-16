@@ -80,6 +80,26 @@ export const en = {
     body: 'Eight+ years of teaching, with experience across all ages for fitness and wellbeing, have made her way of working patient and unhurried: postures adapted and modified to a person’s health needs where needed, and the pace set by breath and calmness.',
   },
 
+  programmes: {
+    eyebrow: 'Programmes',
+    title: 'Three ways to begin',
+    lead: 'Whichever one fits, the sessions are still arranged around your week rather than a timetable.',
+    items: [
+      {
+        title: 'Gentle Yoga',
+        body: 'A slow-paced programme built on adaptation. Postures are modified as needed, and props — a chair, a wall, a cushion — are used wherever they make a shape easier to hold.',
+      },
+      {
+        title: 'Regular Yoga',
+        body: 'The main programme, running from beginner through to intermediate. You start at whatever level you arrive with, and the sequences build from there.',
+      },
+      {
+        title: 'Yoga for Kids',
+        body: 'Shorter, livelier sessions for children — breathing, balance and simple postures, kept playful and pitched at a young attention span.',
+      },
+    ],
+  },
+
   gallery: {
     eyebrow: 'The Practice',
     title: 'Come exactly as you are',
