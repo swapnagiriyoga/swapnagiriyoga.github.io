@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
 import About from './components/About.jsx';
+import Instructor from './components/Instructor.jsx';
 import Gallery from './components/Gallery.jsx';
 import Testimonials from './components/Testimonials.jsx';
 import FAQ from './components/FAQ.jsx';
@@ -42,6 +43,7 @@ export default function App() {
       <main id="main">
         <Hero />
         <About />
+        <Instructor />
         <Gallery />
         <Testimonials />
         <FAQ />

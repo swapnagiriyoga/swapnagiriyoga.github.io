@@ -73,6 +73,13 @@ export const en = {
     ],
   },
 
+  instructor: {
+    eyebrow: 'About the Instructor',
+    title: 'Mrs. Swapna M.',
+    credentials: ['MA (Yoga Shastra)', 'MD (Ayu)', '8+ years teaching'],
+    body: 'Swapna teaches from two traditions at once — the classical study of yoga and an Ayurvedic understanding of the body. Eight years of teaching, most of it one student at a time, have made her way of working patient and unhurried: postures adapted to the body in front of her, and the pace set by the breath rather than by a syllabus.',
+  },
+
   gallery: {
     eyebrow: 'The Practice',
     title: 'Come exactly as you are',
