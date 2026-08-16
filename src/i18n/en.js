@@ -83,7 +83,7 @@ export const en = {
   programmes: {
     eyebrow: 'Programmes',
     title: 'Three ways to begin',
-    lead: 'Whichever one fits, the sessions are still arranged around your week rather than a timetable.',
+    lead: 'Whichever one fits, the sessions are still arranged around your week.',
     items: [
       {
         title: 'Gentle Yoga',
