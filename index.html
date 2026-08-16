@@ -7,20 +7,66 @@
     <meta name="theme-color" content="#F6EEFF" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#120031" media="(prefers-color-scheme: dark)" />
 
-    <title>Swapnagiri Yoga — Find Your Inner Peak</title>
+    <!--
+      SEO note: the title leads with what people actually search for ("online
+      yoga classes"), not the tagline. `data-seo` marks every tag that
+      src/lib/seo.js rewrites when the language changes — leave those attributes
+      in place. The values here are the English defaults, so the file is still
+      correct if the bundle never runs.
+    -->
+    <title data-seo="title">
+      Online Yoga Classes with Swapnagiri Yoga | Live 1-on-1 on Google Meet
+    </title>
     <meta
       name="description"
-      content="Live online yoga with Swapnagiri Yoga. Personal sessions on Google Meet, arranged around your week and open to every level. Find stillness, build strength, reach your peak."
+      data-seo="description"
+      content="Live online yoga classes with Swapnagiri Yoga — personal one-to-one sessions on Google Meet, arranged around your week and open to every level. Taught in English, Hindi and Marathi."
     />
+    <link rel="canonical" href="https://www.swapnagiriyoga.com/" data-seo="canonical" />
+
+    <!--
+      The apex domain 301s to www, so every absolute URL here must be the www
+      form — pointing canonical at a redirecting hostname wastes the signal.
+    -->
+    <link rel="alternate" hreflang="en" href="https://www.swapnagiriyoga.com/" />
+    <link rel="alternate" hreflang="hi" href="https://www.swapnagiriyoga.com/hi/" />
+    <link rel="alternate" hreflang="mr" href="https://www.swapnagiriyoga.com/mr/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.swapnagiriyoga.com/" />
 
     <!-- Open Graph / social preview -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Swapnagiri Yoga — Find Your Inner Peak" />
+    <meta property="og:site_name" content="Swapnagiri Yoga" />
+    <meta property="og:url" content="https://www.swapnagiriyoga.com/" data-seo="og:url" />
+    <meta property="og:locale" content="en_US" data-seo="og:locale" />
+    <meta
+      property="og:title"
+      data-seo="og:title"
+      content="Online Yoga Classes with Swapnagiri Yoga | Live 1-on-1 on Google Meet"
+    />
     <meta
       property="og:description"
-      content="Live online yoga sessions you join from home, at times that suit your week. Breathe, move, and climb inward."
+      data-seo="og:description"
+      content="Live online yoga classes with Swapnagiri Yoga — personal one-to-one sessions on Google Meet, arranged around your week and open to every level."
+    />
+    <meta property="og:image" content="https://www.swapnagiriyoga.com/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Swapnagiri Yoga — live online yoga classes, find your inner peak"
     />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      data-seo="twitter:title"
+      content="Online Yoga Classes with Swapnagiri Yoga | Live 1-on-1 on Google Meet"
+    />
+    <meta
+      name="twitter:description"
+      data-seo="twitter:description"
+      content="Live online yoga classes with Swapnagiri Yoga — personal one-to-one sessions on Google Meet, arranged around your week and open to every level."
+    />
+    <meta name="twitter:image" content="https://www.swapnagiriyoga.com/og-image.jpg" />
 
     <!--
       Headings: Cormorant Garamond (elegant serif). Body: Inter (clean sans).
@@ -64,7 +110,14 @@
             document.documentElement.classList.add('force-reduce-motion');
           }
 
-          var lang = localStorage.getItem('swapnagiri-lang');
+          /* The URL wins over the stored choice, so /hi/ opens in Hindi even
+             for someone who once picked English on this device. Kept in step
+             with the same rule in src/i18n/index.js. */
+          var fromPath = location.pathname.split('/').filter(Boolean)[0];
+          var lang =
+            fromPath === 'hi' || fromPath === 'mr'
+              ? fromPath
+              : localStorage.getItem('swapnagiri-lang');
           if (lang === 'hi' || lang === 'mr') {
             document.documentElement.setAttribute('lang', lang);
           }

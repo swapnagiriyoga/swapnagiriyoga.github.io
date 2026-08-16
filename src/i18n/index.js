@@ -13,8 +13,28 @@ export const LANGUAGES = [
 const DICTIONARIES = { en, hi, mr };
 const STORAGE_KEY = 'swapnagiri-lang';
 
+/** English is served from the root; the others get their own directory. */
+export const DEFAULT_LANGUAGE = 'en';
+
 function normalise(value) {
-  return DICTIONARIES[value] ? value : 'en';
+  return DICTIONARIES[value] ? value : DEFAULT_LANGUAGE;
+}
+
+/**
+ * The URL each language is served from.
+ * `/hi/` and `/mr/` are prerendered as real pages at build time, which is what
+ * makes the Hindi and Marathi copy indexable — a language held only in
+ * localStorage is invisible to search engines.
+ */
+export function pathForLanguage(code) {
+  return code === DEFAULT_LANGUAGE ? '/' : `/${code}/`;
+}
+
+/** Reads the language out of the current URL, e.g. `/hi/` -> `'hi'`. */
+function readPath() {
+  if (typeof location === 'undefined') return null;
+  const segment = location.pathname.split('/').filter(Boolean)[0];
+  return DICTIONARIES[segment] ? segment : null;
 }
 
 function readStored() {
@@ -35,10 +55,27 @@ function apply(code) {
   document.documentElement.setAttribute('lang', code);
 }
 
+/**
+ * Keeps the address bar in step with the chosen language without a reload, so
+ * a visitor who switches to Marathi can share the URL they are looking at and
+ * the recipient lands on Marathi. `replaceState` rather than `pushState`: the
+ * back button should leave the site, not walk back through language flips.
+ */
+function syncUrl(code) {
+  if (typeof history === 'undefined' || typeof location === 'undefined') return;
+  const next = pathForLanguage(code) + location.hash;
+  if (next !== location.pathname + location.hash) {
+    history.replaceState(null, '', next);
+  }
+}
+
 /* A single shared value, like the theme and motion stores — the picker is
    rendered in both the navbar and the mobile menu, and separate useState would
-   let those two copies disagree. */
-let current = normalise(readStored());
+   let those two copies disagree.
+
+   The URL wins over the stored preference: someone opening /hi/ from a search
+   result must get Hindi even if they once chose English on this device. */
+let current = normalise(readPath() ?? readStored());
 const listeners = new Set();
 
 export const languageStore = {
@@ -53,6 +90,7 @@ export const languageStore = {
       /* Private browsing — the choice still holds for this session. */
     }
     apply(code);
+    syncUrl(code);
     listeners.forEach((listener) => listener());
   },
   subscribe(listener) {

@@ -4,6 +4,21 @@
  * falling back.
  */
 export const en = {
+  /**
+   * Search-result copy. The title leads with the phrase people actually type;
+   * "Find Your Inner Peak" is beautiful but nobody searches for it, so it stays
+   * on the page and out of the title. Keep titles under ~60 characters and
+   * descriptions under ~155 — Google truncates past that.
+   */
+  seo: {
+    title: 'Online Yoga Classes with Swapnagiri Yoga | Live 1-on-1 on Google Meet',
+    description:
+      'Live online yoga classes with Swapnagiri Yoga — personal one-to-one sessions on Google Meet, arranged around your week and open to every level.',
+    /** Screen-reader-only sentence appended to the H1, describing the page. */
+    headingDescriptor: 'Live online yoga classes on Google Meet',
+    ogLocale: 'en_US',
+  },
+
   nav: {
     about: 'About',
     gallery: 'The Practice',

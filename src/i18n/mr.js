@@ -1,5 +1,14 @@
 /** Marathi copy. Mirrors the shape of en.js exactly. */
 export const mr = {
+  /** See the note in en.js — same rules, Marathi search phrasing. */
+  seo: {
+    title: 'ऑनलाइन योग वर्ग | स्वप्नगिरी योग — Google Meet वर लाइव्ह',
+    description:
+      'स्वप्नगिरी योगसोबत लाइव्ह ऑनलाइन योग वर्ग — Google Meet वर वैयक्तिक सत्रे, तुमच्या सोयीच्या वेळेत, प्रत्येक स्तरासाठी.',
+    headingDescriptor: 'Google Meet वर लाइव्ह ऑनलाइन योग वर्ग',
+    ogLocale: 'mr_IN',
+  },
+
   nav: {
     about: 'ओळख',
     gallery: 'सराव',

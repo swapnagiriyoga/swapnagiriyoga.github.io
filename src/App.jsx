@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
 import About from './components/About.jsx';
@@ -10,13 +11,21 @@ import FloatingWhatsApp from './components/FloatingWhatsApp.jsx';
 import BackToTop from './components/BackToTop.jsx';
 import ScrollProgress from './components/ScrollProgress.jsx';
 import { useTranslation } from './i18n/index.js';
+import { applySeo } from './lib/seo.js';
 
 /**
  * Swapnagiri Yoga — single-page marketing site.
  * Sections appear here in the order they are read.
  */
 export default function App() {
-  const { t } = useTranslation();
+  const { lang, t } = useTranslation();
+
+  /* Title, canonical, social tags and JSON-LD all depend on the language, and
+     the build's prerender step reads the head after this has run. */
+  useEffect(() => {
+    applySeo(lang, t);
+  }, [lang, t]);
+
   return (
     <>
       {/* Keyboard users land here first. */}

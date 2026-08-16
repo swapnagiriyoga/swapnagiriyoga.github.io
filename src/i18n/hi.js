@@ -1,5 +1,14 @@
 /** Hindi copy. Mirrors the shape of en.js exactly. */
 export const hi = {
+  /** See the note in en.js — same rules, Hindi search phrasing. */
+  seo: {
+    title: 'ऑनलाइन योग कक्षाएँ | स्वप्नगिरि योग — Google Meet पर लाइव',
+    description:
+      'स्वप्नगिरि योग के साथ लाइव ऑनलाइन योग कक्षाएँ — Google Meet पर व्यक्तिगत सत्र, आपके समय के अनुसार, हर स्तर के लिए।',
+    headingDescriptor: 'Google Meet पर लाइव ऑनलाइन योग कक्षाएँ',
+    ogLocale: 'hi_IN',
+  },
+
   nav: {
     about: 'परिचय',
     gallery: 'अभ्यास',

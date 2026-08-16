@@ -1,0 +1,9 @@
+# Swapnagiri Yoga — https://www.swapnagiriyoga.com
+# Everything here is a public marketing page; nothing needs hiding.
+
+User-agent: *
+Allow: /
+
+# The apex domain 301s to www, so the sitemap is declared on the www host to
+# match the canonical URLs inside it.
+Sitemap: https://www.swapnagiriyoga.com/sitemap.xml

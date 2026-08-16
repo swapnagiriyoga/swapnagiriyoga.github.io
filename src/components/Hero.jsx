@@ -64,6 +64,14 @@ export function Hero() {
           <span className="mt-3 block bg-linear-to-r from-brand via-accent-2 to-brand-deep bg-clip-text text-transparent italic">
             {t.hero.tagline}
           </span>
+          {/*
+            The visible H1 is the brand and the tagline, which says nothing
+            about what this page offers. This adds that plainly for screen
+            readers and search engines — it repeats the eyebrow directly above
+            it, so it describes what is already on the page rather than hiding
+            anything from sighted visitors.
+          */}
+          <span className="sr-only">{t.seo.headingDescriptor}</span>
         </h1>
 
         <p className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-ink/75 sm:text-lg">
