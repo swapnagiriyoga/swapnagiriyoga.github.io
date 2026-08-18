@@ -38,13 +38,14 @@ export function Section({
         {(eyebrow || title || lead) && (
           <Reveal className="mx-auto mb-14 max-w-2xl text-center sm:mb-16">
             {/* Every section needs a heading in the outline. When there is no
-                title, the eyebrow becomes the h2 — styled identically, so the
-                page looks unchanged but does not leave an unlabelled region. */}
+                title, the eyebrow becomes the h2, so the region is still labelled.
+                It keeps the eyebrow's look but is set a little larger, since
+                here it is carrying the section title's job on its own. */}
             {eyebrow &&
               (title ? (
                 <p className="eyebrow mb-4">{eyebrow}</p>
               ) : (
-                <h2 className="eyebrow font-sans mb-4">{eyebrow}</h2>
+                <h2 className="eyebrow mb-4 font-sans text-sm sm:text-base">{eyebrow}</h2>
               ))}
             {title && (
               <h2 className="text-4xl leading-tight sm:text-5xl lg:text-[3.25rem]">{title}</h2>
