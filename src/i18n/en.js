@@ -75,7 +75,7 @@ export const en = {
     eyebrow: 'About the Instructor',
     title: 'Mrs. Swapna M.',
     credentials: ['MA (Yoga Shastra)', 'MD (Ayu)', '8+ years of teaching experience'],
-    body: 'Eight+ years of teaching, with experience across all ages for fitness and wellbeing, have made her way of working patient and unhurried: postures adapted and modified to a person’s health needs where needed, and the pace set by breath and calmness.',
+    body: 'Eight+ years of teaching, with experience across all ages for fitness and wellbeing, mean she works patiently and without hurry: postures adapted and modified to a person’s health needs where needed, and the pace set by breath and calmness.',
   },
 
   programmes: {
