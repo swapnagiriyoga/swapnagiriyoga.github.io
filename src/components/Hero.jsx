@@ -75,8 +75,6 @@ export function Hero() {
         </h1>
 
         <p className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-ink/75 sm:text-lg">
-          {t.hero.taglineLead}{' '}
-          <em className="text-brand-deep not-italic">{t.hero.taglineTerm}</em>
           {t.hero.intro}
         </p>
 

@@ -37,7 +37,15 @@ export function Section({
       <div className={`relative mx-auto w-full max-w-6xl px-6 lg:px-8 ${containerClassName}`}>
         {(eyebrow || title || lead) && (
           <Reveal className="mx-auto mb-14 max-w-2xl text-center sm:mb-16">
-            {eyebrow && <p className="eyebrow mb-4">{eyebrow}</p>}
+            {/* Every section needs a heading in the outline. When there is no
+                title, the eyebrow becomes the h2 — styled identically, so the
+                page looks unchanged but does not leave an unlabelled region. */}
+            {eyebrow &&
+              (title ? (
+                <p className="eyebrow mb-4">{eyebrow}</p>
+              ) : (
+                <h2 className="eyebrow font-sans mb-4">{eyebrow}</h2>
+              ))}
             {title && (
               <h2 className="text-4xl leading-tight sm:text-5xl lg:text-[3.25rem]">{title}</h2>
             )}

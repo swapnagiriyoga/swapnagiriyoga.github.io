@@ -36,10 +36,8 @@ export const en = {
     brandName: 'Swapnagiri Yoga',
     tagline: 'Find Your Inner Peak',
     eyebrow: 'Live online yoga · Practise from home',
-    taglineLead: 'Swapnagiri means',
-    taglineTerm: 'dream mountain',
     intro:
-      '. Every practice is a small ascent — breath by breath, you climb inward and arrive somewhere quieter. Sessions are arranged around your week, one conversation at a time.',
+      'Every practice is a small ascent — breath by breath, you climb inward and arrive somewhere quieter. Sessions are arranged around your week, one conversation at a time.',
     primaryCta: 'Start Your Journey',
     secondaryCta: 'Our Philosophy',
     highlights: [
@@ -82,7 +80,6 @@ export const en = {
 
   programmes: {
     eyebrow: 'Programmes',
-    title: 'Three ways to begin',
     lead: 'Whichever one fits, the sessions are still arranged around your week.',
     items: [
       {

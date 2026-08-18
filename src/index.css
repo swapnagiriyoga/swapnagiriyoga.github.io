@@ -231,6 +231,16 @@ html[lang='mr'] :is(p, li, blockquote, label, figcaption) {
   line-height: 1.8;
 }
 
+/* A section with no title promotes its eyebrow to the h2, so the same small
+   uppercase label can arrive as either a <p> or a heading. The rule above
+   would then hand it the serif face and a tighter leading than its
+   neighbours, so pin it to the body face regardless of tag. */
+html[lang='hi'] .eyebrow,
+html[lang='mr'] .eyebrow {
+  font-family: 'Noto Sans Devanagari', var(--font-sans);
+  line-height: 1.8;
+}
+
 /* Devanagari has no italic form, so a browser-synthesised slant just smears
    the matras. `.italic` is matched directly because the utility is applied to
    inner spans, not only to the block elements. */
