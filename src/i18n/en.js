@@ -88,7 +88,7 @@ export const en = {
       },
       {
         title: 'Regular Yoga',
-        body: 'In this programme, sessions run from beginner through to intermediate. You start wherever you arrive, and the sequences build from there.',
+        body: 'In this programme, sessions run from beginner through to intermediate. You start wherever you arrive, the sequences build from there, and the practice settles into a regular weekly rhythm.',
       },
       {
         title: 'Yoga for Kids',
